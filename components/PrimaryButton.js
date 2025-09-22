@@ -4,7 +4,7 @@ export default function PrimaryButton({ onClick, children }) {
   return (
     <Pressable
       onPress={onClick}
-      android_ripple={{ color: "#33001aff" }}
+      android_ripple={{ color: "#ffabd6ff" }}
       style={({ pressed }) => pressed && styles.pressed}
     >
       <View style={styles.container}>

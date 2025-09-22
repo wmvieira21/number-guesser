@@ -1,17 +1,22 @@
+import { LinearGradient } from "expo-linear-gradient";
 import { StatusBar } from "expo-status-bar";
-import "react-native-reanimated";
-
-import { useColorScheme } from "@/hooks/use-color-scheme";
+import { StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import StartGameScreen from "./screens/StartGameScreen";
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
-
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <StartGameScreen />
-      <StatusBar style="auto" />
-    </SafeAreaView>
+    <LinearGradient colors={["#4e0329", "#ddb52f"]} style={styles.container}>
+      <SafeAreaView>
+        <StartGameScreen />
+        <StatusBar style="light" />
+      </SafeAreaView>
+    </LinearGradient>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});

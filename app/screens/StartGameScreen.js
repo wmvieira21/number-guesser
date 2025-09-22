@@ -25,17 +25,18 @@ function StartGameScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#4d082aff",
+    backgroundColor: "#38001cff",
     alignItems: "center",
     padding: 16,
     marginHorizontal: 24,
     borderRadius: 8,
-    marginTop: 100,
+    marginTop: 50, //SafeAreaView aplied on _Layout.tsx
     elevation: 4,
     shadowColor: "black",
     shadowOffset: { width: 0, height: 2 },
     shadowRadius: 6,
     shadowOpacity: 0.25,
+    gap: 16,
   },
   inputContainer: {
     width: "100%",
