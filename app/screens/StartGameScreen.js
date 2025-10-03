@@ -1,6 +1,9 @@
+import Title from "@/components/ui/Title";
 import { Colors } from "@/constants/theme";
 import { useState } from "react";
 import { Alert, StyleSheet, TextInput, View } from "react-native";
+import Card from "../../components/ui/Card";
+import InstructionText from "../../components/ui/InstructionText";
 import PrimaryButton from "../../components/ui/PrimaryButton";
 
 function StartGameScreen(props) {
@@ -29,42 +32,37 @@ function StartGameScreen(props) {
   }
 
   return (
-    <View style={styles.container}>
-      <TextInput
-        style={styles.textInput}
-        maxLength={2}
-        keyboardType="number-pad"
-        autoCapitalize="none"
-        autoCorrect={false}
-        value={enteredNumber}
-        onChangeText={(text) => setEnteredNumber(text)}
-      />
-      <View style={styles.inputContainer}>
-        <View style={styles.buttonContainer}>
-          <PrimaryButton onClick={resetInputHandler}>Reset</PrimaryButton>
+    <View style={styles.rootContainer}>
+      <Title>Guess My Number</Title>
+      <Card style={styles.container}>
+        <InstructionText>Enter a number</InstructionText>
+        <TextInput
+          style={styles.textInput}
+          maxLength={2}
+          keyboardType="number-pad"
+          autoCapitalize="none"
+          autoCorrect={false}
+          value={enteredNumber}
+          onChangeText={(text) => setEnteredNumber(text)}
+        />
+        <View style={styles.inputContainer}>
+          <View style={styles.buttonContainer}>
+            <PrimaryButton onClick={resetInputHandler}>Reset</PrimaryButton>
+          </View>
+          <View style={styles.buttonContainer}>
+            <PrimaryButton onClick={comfirmInputHandler}>Confirm</PrimaryButton>
+          </View>
         </View>
-        <View style={styles.buttonContainer}>
-          <PrimaryButton onClick={comfirmInputHandler}>Confirm</PrimaryButton>
-        </View>
-      </View>
+      </Card>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: Colors.primary800,
+  rootContainer: {
+    flex: 1,
+    marginTop: 100,
     alignItems: "center",
-    padding: 16,
-    marginHorizontal: 24,
-    borderRadius: 8,
-    marginTop: 50, //SafeAreaView aplied on _Layout.tsx
-    elevation: 4,
-    shadowColor: "black",
-    shadowOffset: { width: 0, height: 2 },
-    shadowRadius: 6,
-    shadowOpacity: 0.25,
-    gap: 16,
   },
   inputContainer: {
     width: "100%",
@@ -84,7 +82,7 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flex: 1,
-  },
+  }
 });
 
 export default StartGameScreen;

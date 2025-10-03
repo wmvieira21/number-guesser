@@ -1,7 +1,9 @@
+import Card from "@/components/ui/Card";
 import PrimaryButton from "@/components/ui/PrimaryButton";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Alert, StyleSheet, Text, View } from "react-native";
 import NumberContainer from "../../components/game/NumberContainer";
+import InstructionText from "../../components/ui/InstructionText";
 import Title from "../../components/ui/Title";
 
 let minBoundary = 1;
@@ -17,13 +19,15 @@ function generateRandomBetween(minBoundary, maxBoundary, exclude) {
   }
 }
 
-export default function GameScreen({ userPickedNumber }) {
-  const initialGuess = generateRandomBetween(
-    minBoundary,
-    maxBoundary,
-    userPickedNumber
-  );
+export default function GameScreen({ userPickedNumber, onGameOver }) {
+  const initialGuess = generateRandomBetween(1, 100, userPickedNumber);
   const [currentGuess, setCurrentGuess] = useState(initialGuess);
+
+  useEffect(() => {
+    if (currentGuess === userPickedNumber) {
+      onGameOver();
+    }
+  }, [currentGuess, userPickedNumber, onGameOver]);
 
   function nextGuessHandler(direction) {
     if (
@@ -51,14 +55,17 @@ export default function GameScreen({ userPickedNumber }) {
     <View style={styles.container}>
       <Title>Opponent's guess</Title>
       <NumberContainer>{currentGuess}</NumberContainer>
-      <View style={styles.buttonsContainer}>
-        <PrimaryButton onClick={nextGuessHandler.bind(this, "higher")}>
-          +
-        </PrimaryButton>
-        <PrimaryButton onClick={nextGuessHandler.bind(this, "lower")}>
-          -
-        </PrimaryButton>
-      </View>
+      <Card>
+        <InstructionText>Higher or lower?</InstructionText>
+        <View style={styles.buttonsContainer}>
+          <PrimaryButton onClick={nextGuessHandler.bind(this, "higher")}>
+            +
+          </PrimaryButton>
+          <PrimaryButton onClick={nextGuessHandler.bind(this, "lower")}>
+            -
+          </PrimaryButton>
+        </View>
+      </Card>
       <View>
         <Text>Log Rounds</Text>
       </View>
@@ -72,7 +79,7 @@ const styles = StyleSheet.create({
     padding: 24,
   },
   buttonsContainer: {
-    flexDirection: "column",
+    flexDirection: "row",
     justifyContent: "center",
     gap: 10,
   },

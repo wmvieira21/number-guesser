@@ -3,19 +3,33 @@ import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
 import { ImageBackground, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import GameOverScreen from "./screens/GameOverScreen";
 import GameScreen from "./screens/GameScreen";
 import StartGameScreen from "./screens/StartGameScreen";
 
 export default function RootLayout() {
   const [pickedNumber, setPickedNumber] = useState(null);
+  const [gameIsOver, setGameIsOver] = useState(true);
 
   function pickNumberHandler(number) {
     setPickedNumber(number);
+    setGameIsOver(false);
+  }
+  function gameOverHandler() {
+    setGameIsOver(true);
   }
 
   let screen = <StartGameScreen onConfirmNumber={pickNumberHandler} />;
   if (pickedNumber) {
-    screen = <GameScreen userPickedNumber={pickedNumber} />;
+    screen = (
+      <GameScreen
+        userPickedNumber={pickedNumber}
+        onGameOver={gameOverHandler}
+      />
+    );
+  }
+  if (gameIsOver && pickedNumber) {
+    screen = <GameOverScreen />;
   }
 
   return (
