@@ -13,6 +13,7 @@ export const Colors = {
   primary300: "#ffabd6ff",
   primary800: "#38001cff",
   accent500: "#ddb52f",
+  accent200: "#ddb42faf",
 
   light: {
     text: "#11181C",

@@ -6,8 +6,8 @@ export default function Title({ children }) {
 
 const styles = StyleSheet.create({
   tittle: {
+    fontFamily: "Inter_200ExtraLight",
     fontSize: 24,
-    fontWeight: "bold",
     textAlign: "center",
     padding: 12,
     borderWidth: 2,
